@@ -1,16 +1,38 @@
 package com.markthedev.weekly_view.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+
 
 @Entity
 public class Users {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Column(name = "first_name")
     private String first_name;
+
+    @Column(name = "last_name")
     private String last_name;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "password")
     private String password;
 
+
+    public Users(){
+        super();
+    }
+
+    public Users(String first_name, String last_name, String email, String password) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.password = password;
+    }
 
     public long getId() {
         return id;
@@ -44,11 +66,5 @@ public class Users {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
