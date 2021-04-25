@@ -5,11 +5,9 @@ import com.markthedev.weekly_view.model.Users;
 import com.markthedev.weekly_view.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -37,8 +35,23 @@ public class UsersController {
 
     }
     // save user
+    @GetMapping("users")
+    public Users createUser(@RequestBody Users user){
+        return this.usersRepository.save(user);
+
+    }
 
     // update user
+
+    public ResponseEntity<Users> updateUser(@PathVariable(value ="id") Long userId, @Valid @RequestBody Users userDetails) throws ResourceNotFoundException{
+        Users user = usersRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found by this id: " + userId));
+        user.setEmail(userDetails.getEmail());
+        user.setFirst_name(userDetails.getFirst_name());
+        user.setLast_name(userDetails.getLast_name());
+
+        return ResponseEntity.ok(this.usersRepository.save(user));
+    }
 
     // delete user
 }
