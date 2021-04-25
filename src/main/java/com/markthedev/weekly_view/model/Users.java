@@ -1,6 +1,8 @@
 package com.markthedev.weekly_view.model;
 
+import javax.persistence.Entity;
 
+@Entity
 public class Users {
 
     private long id;
