@@ -10,16 +10,16 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "first_name")
+    @Column(nullable = false, length = 20)
     private String first_name;
 
-    @Column(name = "last_name")
+    @Column(nullable = false, length = 20)
     private String last_name;
 
-    @Column(name = "email")
+    @Column(nullable = false, unique = true, length = 45)
     private String email;
 
-    @Column(name = "password")
+    @Column(nullable = false, length = 64)
     private String password;
 
 
