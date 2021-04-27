@@ -1,6 +1,6 @@
 package com.markthedev.weekly_view.config;
 
-import com.markthedev.weekly_view.services.UserService;
+import com.markthedev.weekly_view.services.WebSecurityConfiguration;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @AllArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private UserService userService;
+    private WebSecurityConfiguration webSecurityConfiguration;
 
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService)
+        auth.userDetailsService(webSecurityConfiguration)
                 .passwordEncoder(bCryptPasswordEncoder());
     }
 }
